@@ -19,58 +19,58 @@ public class MaxHandleValidationSegment extends HandleValidationSegment<Object>{
 	/**
      * @param constraintData
      */
-    public MaxHandleValidationSegment(String constraintData) {​​​​​​​
+    public MaxHandleValidationSegment(String constraintData) {
         super(constraintData);
-    }​
+    }
 
 	/**
      * @see validation.custom.ValidateSegment#isValid(java.lang.Object)
      */
     @Override
-    public boolean isValid(Object input) throws Exception {​​​​​​​
-        if(input == null){​​​​​​​
+    public boolean isValid(Object input) throws Exception {
+        if(input == null){
             return false;
-        }​​​​​​​
+        }
         
         Long constraintValue = Long.valueOf(constraintData);
-        if (input instanceof Number) {​​​​​​​
+        if (input instanceof Number) {
             Number num = (Number) input;
             return constraintValue >= num.doubleValue();
-        }​​​​​​​
+        }
         
-        if (input instanceof String) {​​​​​​​
+        if (input instanceof String) {
             String inputStr = input.toString();
             return constraintValue >= inputStr.length();
-        }​​​​​​​
+        }
         
-        if (input instanceof Collection<?>) {​​​​​​​
+        if (input instanceof Collection<?>) {
             return constraintValue >= ((Collection<?>) input).size();
-        }​​​​​​​
+        }
         
-        if (input instanceof Map<?, ?>) {​​​​​​​
+        if (input instanceof Map<?, ?>) {
             return constraintValue >= ((Map<?, ?>) input).size();
-        }​​​​​​​
+        }
         
         return false;
-    }​
+    }
 
 	/**
-     * @see validation.constraint.HandleValidationSegment#isValidType()
+     * @see validation.constraint.HandleValidationSegment#isValidConstraintType()
      */
     @Override
-    public boolean isValidConstraintType() {​​​​​​​
+    public boolean isValidConstraintType() {
         return constraintData.matches("^-?\\d+$");
-    }​
+    }
 
-	public String getValidateType() {​​​​​​​
+	public String getValidateType() {
         return KEY;
-    }​
+    }
 
 	/**
      * @see validation.custom.ValidateSegment#getInfor(java.lang.Object)
      */
     @Override
-    public String[] getInfor(Object input) {​​​​​​​
+    public String[] getInfor(Object input) {
         return null;
-    }​
-}​
+    }
+}

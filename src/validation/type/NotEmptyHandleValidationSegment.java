@@ -25,7 +25,7 @@ public class NotEmptyHandleValidationSegment extends HandleValidationSegment<Obj
 	}
 
 	/**
-	 * @param <T>
+	 *
 	 * @see validation.custom.ValidateSegment#isValid(java.lang.Object)
 	 */
 	@Override

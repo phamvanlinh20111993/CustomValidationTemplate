@@ -20,7 +20,7 @@ public final class HandleConstraint {
 	protected String constraintData;
 
 	/**
-	 * @param constrant
+	 * @param constraintData
 	 */
 	public HandleConstraint(String constraintData) {
 		super();

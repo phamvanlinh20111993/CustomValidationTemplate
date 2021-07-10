@@ -5,75 +5,55 @@ import java.util.Map;
 
 import validation.constraint.HandleValidationSegment;
 
-/**
- * <ul>
- * <li>Created by : dev
- * <li>Created Date : Jul 9, 2021 8:35:41 AM
- * </ul>
- *
- * @author dev
- */
 public class MinHandleValidationSegment extends HandleValidationSegment<Object> {
-	public static final String KEY = "min";
+	
+	public static final String KEY = "max";
 
-	/**
-     * @param constraintData
-     */
-    public MinHandleValidationSegment(String constraintData) {​​​​​​​
-        super(constraintData);
-    }​
-	/**
-     * @see validation.custom.ValidateSegment#isValid(java.lang.Object)
-     */
-    @Override
-    public boolean isValid(Object input) throws Exception {​​​​​​​
-        if(input == null){​​​​​​​
-            return false;
-        }​​​​​​​
-        
+	public MinHandleValidationSegment(String constraintData) {
+		super(constraintData);
+	}
+
+	@Override
+	public boolean isValid(Object input) throws Exception {
+		if(input == null) {
+			return false;
+		}
+		
         Long constraintValue = Long.valueOf(constraintData);
-        if (input instanceof Number) {​​​​​​​
+        if (input instanceof Number) {
             Number num = (Number) input;
             return constraintValue <= num.doubleValue();
-        }​​​​​​​
+        }
         
-        if (input instanceof String) {​​​​​​​
+        if (input instanceof String) {
             String inputStr = input.toString();
             return constraintValue <= inputStr.length();
-        }​​​​​​​
+        }
         
-        if (input instanceof Collection<?>) {​​​​​​​
+        if (input instanceof Collection<?>) {
             return constraintValue <= ((Collection<?>) input).size();
-        }​​​​​​​
+        }
         
-        if (input instanceof Map<?, ?>) {​​​​​​​
+        if (input instanceof Map<?, ?>) {
             return constraintValue <= ((Map<?, ?>) input).size();
-        }​​​​​​​
+        }
         
         return false;
-    }​​
+	}
 
-	/**
-     * @see validation.constraint.HandleValidationSegment#isValidConstraintType()
-     */
-    @Override
-    public boolean isValidConstraintType() {​​​​​​​
-        return constraintData.matches("^-?\\d+$");
-    }​​
+	@Override
+	public String[] getInfor(Object input) {
+		return null;
+	}
 
-	/**
-     * @see validation.constraint.HandleValidationSegment#getValidateType()
-     */
-    @Override
-    public String getValidateType() {​​​​​​​
-        return KEY;
-    }​
-	/**
-     * @see validation.custom.ValidateSegment#getInfor(java.lang.Object)
-     */
-    @Override
-    public String[] getInfor(Object input) {​​​​​​​
-        return null;
-    }​​
+	@Override
+	public boolean isValidConstraintType() {
+		return constraintData.matches("^-?\\d+$");
+	}
 
-}​ ​ ​ 
+	@Override
+	public String getValidateType() {
+		return KEY;
+	}
+	
+}

@@ -6,6 +6,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import validation.constraint.HandleValidationSegment;
+import validation.exception.InvalidInputException;
 
 /**
  * <ul>
@@ -64,10 +65,24 @@ public class RangeHandleValidationSegment extends HandleValidationSegment<Object
 	 * @see validation.constraint.HandleValidationSegment#isValidConstraintType()
 	 */
 	@Override
-	public boolean isValidConstraintType() {
+	public boolean isValidConstraintType() throws InvalidInputException {
 		Pattern r = Pattern.compile(rangePattern());
 		Matcher m = r.matcher(constraintData);
-		return m.find();
+		if (m.find()) {
+			try {
+				Integer left = Integer.valueOf(m.group(1));
+				Integer right = Integer.valueOf(m.group(2));
+				if (left >= right) {
+					throw new InvalidInputException(
+							"Error number constraints [left, right]" + ": [" + left + ", " + right + "]");
+				}
+			} catch (NumberFormatException e) {
+				throw new InvalidInputException("Error number constraints " + e.getMessage());
+			}
+
+		}
+
+		return false;
 	}
 
 	/**

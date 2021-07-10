@@ -17,7 +17,7 @@ public abstract class HandleValidationSegment<T> implements ValidateSegment<T> {
 	protected String constraintData;
 
 	/**
-	 * @param constrant
+	 * @param constraintData
 	 */
 	public HandleValidationSegment(String constraintData) {
 		super();

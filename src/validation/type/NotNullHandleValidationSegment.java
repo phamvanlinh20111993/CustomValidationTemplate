@@ -10,46 +10,46 @@ import validation.constraint.HandleValidationSegment;
  *
  * @author dev
  */
-public class NotNullHandleValidationSegment extends HandleValidationSegment<Object> {​
+public class NotNullHandleValidationSegment extends HandleValidationSegment<Object> {
 
-	public static final String KEY = "notnull";
+    public static final String KEY = "notnull";
 
-	/**
+    /**
      * @param constraintData
      */
-    public NotNullHandleValidationSegment(String constraintData) {​​​​​​​
+    public NotNullHandleValidationSegment(String constraintData) {
         super(constraintData);
-    }​​
+    }
 
-	/**
+    /**
      * @see validation.custom.ValidateSegment#isValid(java.lang.Object)
      */
     @Override
-    public boolean isValid(Object input) throws Exception {​​​​​​​
+    public boolean isValid(Object input) throws Exception {
         return input != null;
-    }​​
+    }
 
-	/**
+    /**
      * @see validation.constraint.HandleValidationSegment#isValidConstraintType()
      */
     @Override
-    public boolean isValidConstraintType() {​​​​​​​
+    public boolean isValidConstraintType() {
         return true;
-    }​​
+    }
 
-	/**
+    /**
      * @see validation.constraint.HandleValidationSegment#getValidateType()
      */
     @Override
-    public String getValidateType() {​​​​​​​
+    public String getValidateType() {
         return KEY;
-    }​​
+    }
 
-	/**
+    /**
      * @see validation.custom.ValidateSegment#getInfor(java.lang.Object)
      */
     @Override
-    public String[] getInfor(Object input) {​​​​​​​
+    public String[] getInfor(Object input) {
         return null;
-    }​ ​
-}​​
+    }
+}
