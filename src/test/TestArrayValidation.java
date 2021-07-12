@@ -23,9 +23,11 @@ public class TestArrayValidation {
 		inputs.add("ph");
 		inputs.add("pham van fsdfsdfsfsd linh");
 		inputs.add("pham van fsdfs");
-		inputs.add("200444444444444444");
+		inputs.add("20044444s4444444444");
+		inputs.add("20044444s4444444444");
+		inputs.add("20044444s4444444444");
 		// String constraints = "[max:{100}];[max:{7}]";
-		String constraints = "[max:{100};min:{10}]{1,};[min:{1};range:{10,9}];[max:{40}];[pattern:{\\d+}]";
+		String constraints = "[max:{100};min:{10}]{1,2};[min:{1};range:{10,19}];[max:{40}];[pattern:{^\\d+$}]";
 		CustomArrayTemplateValidation<String> customArrayTemplateValidation = new CustomArrayTemplateValidation<>(
 				inputs, constraints);
 

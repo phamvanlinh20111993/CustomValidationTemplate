@@ -34,7 +34,8 @@ public class CustomArrayTemplateValidation<K> extends CustomValidation<K> {
 		this.input = input;
 
 	}
-
+	
+	// TODO need to refactor and change some logic.
 	protected String[] splitConstraints() {
 		assert (constraints != null && constraints.indexOf(this.VALIDATION_SEPARATION) > 0);
 		String formatConstraints = this.constraints.replaceAll("\\s+", "");
@@ -69,7 +70,7 @@ public class CustomArrayTemplateValidation<K> extends CustomValidation<K> {
 		List<ArrayTypeConstraintRule> constraintsRule = getConstraintsRule();
 
 		for (ArrayTypeConstraintRule constraintRule : constraintsRule) {
-			System.out.println("constraint " + constraintRule.toString());
+			System.out.println(constraintRule);
 			int valid = validateElement(inputArr, constraintRule.getConstraint(), constraintRule.getFrom(),
 					constraintRule.getTo());
 			if (valid >= 0) {
@@ -88,7 +89,6 @@ public class CustomArrayTemplateValidation<K> extends CustomValidation<K> {
 			if (currentElement > this.input.size()) {
 				break;
 			}
-
 			ArrayTypeConstraintRule constraintRule = new HandleArrayConstraint(constraint).getConstraintProperty();
 			Integer from = constraintRule.getFrom();
 			Integer to = constraintRule.getTo();

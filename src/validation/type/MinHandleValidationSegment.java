@@ -7,7 +7,7 @@ import validation.constraint.HandleValidationSegment;
 
 public class MinHandleValidationSegment extends HandleValidationSegment<Object> {
 	
-	public static final String KEY = "max";
+	public static final String KEY = "min";
 
 	public MinHandleValidationSegment(String constraintData) {
 		super(constraintData);

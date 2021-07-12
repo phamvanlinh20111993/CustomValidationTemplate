@@ -76,6 +76,7 @@ public class RangeHandleValidationSegment extends HandleValidationSegment<Object
 					throw new InvalidInputException(
 							"Error number constraints [left, right]" + ": [" + left + ", " + right + "]");
 				}
+				return true;
 			} catch (NumberFormatException e) {
 				throw new InvalidInputException("Error number constraints " + e.getMessage());
 			}
