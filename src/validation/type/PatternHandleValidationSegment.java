@@ -14,7 +14,7 @@ import validation.constraint.HandleValidationSegment;
  *
  * @author dev
  */
-public class PatternHandleValidationSegment extends HandleValidationSegment<String> {
+public class PatternHandleValidationSegment extends HandleValidationSegment<Object> {
 
 	public static final String KEY = "pattern";
 
@@ -29,12 +29,12 @@ public class PatternHandleValidationSegment extends HandleValidationSegment<Stri
 	 * @see validation.custom.ValidateSegment#isValid(java.lang.Object)
 	 */
 	@Override
-	public boolean isValid(String input) throws Exception {
+	public boolean isValid(Object input) throws Exception {
 		if (input == null) {
 			return false;
 		}
 		Pattern r = Pattern.compile(constraintData);
-		Matcher m = r.matcher(input);
+		Matcher m = r.matcher(input.toString());
 		return m.find();
 	}
 
@@ -63,7 +63,7 @@ public class PatternHandleValidationSegment extends HandleValidationSegment<Stri
 	 * @see validation.custom.ValidateSegment#getInfor(java.lang.Object)
 	 */
 	@Override
-	public String[] getInfor(String input) {
+	public String[] getInfor(Object input) {
 		return null;
 	}
 

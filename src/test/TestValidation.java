@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import validation.custom.CustomTemplateValidation;
+import validation.custom.CustomValidation;
 
 /**
  * <ul>
@@ -34,7 +35,7 @@ public class TestValidation {
 		List<String> input = new ArrayList<>();
 		input.add("10000000000000000000000000");
 
-		CustomTemplateValidation<String> customealidation = new CustomTemplateValidation<>(input, constraints);
+		CustomValidation<String> customealidation = new CustomTemplateValidation<>(input, constraints);
 		System.out.println(customealidation.checkValidateConstraints());
 	}
 

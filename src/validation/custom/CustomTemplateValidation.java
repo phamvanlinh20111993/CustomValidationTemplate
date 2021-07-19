@@ -3,6 +3,8 @@ package validation.custom;
 import java.util.Collection;
 
 import validation.constraint.HandleConstraint;
+import validation.constraint.HandleValidationSegment;
+import validation.exception.InvalidInputException;
 import validation.type.MaxHandleValidationSegment;
 import validation.type.MinHandleValidationSegment;
 import validation.type.NotEmptyHandleValidationSegment;
@@ -44,50 +46,44 @@ public class CustomTemplateValidation<T> extends CustomValidation<T> {
 		assert (this.input != null);
 		String[] constraints = splitConstraints();
 
-		String invalidType = "";
 		for (String constraint : constraints) {
+
 			HandleConstraint handleConstraint = new HandleConstraint(constraint);
-			boolean isValid = true;
+			HandleValidationSegment<Object> handleValidationSegment = null;
 			switch (handleConstraint.getConstraintName()) {
 
 			case MaxHandleValidationSegment.KEY:
-				isValid = new MaxHandleValidationSegment(handleConstraint.getConstraintValue()).handle(input);
-				invalidType = MaxHandleValidationSegment.class.toString();
+				handleValidationSegment = new MaxHandleValidationSegment(handleConstraint.getConstraintValue());
 				break;
 
 			case NotNullHandleValidationSegment.KEY:
-				isValid = new NotNullHandleValidationSegment(handleConstraint.getConstraintValue()).handle(input);
-				invalidType = NotNullHandleValidationSegment.class.toString();
+				handleValidationSegment = new NotNullHandleValidationSegment(handleConstraint.getConstraintValue());
 				break;
 
 			case MinHandleValidationSegment.KEY:
-				isValid = new MinHandleValidationSegment(handleConstraint.getConstraintValue()).handle(input);
-				invalidType = MinHandleValidationSegment.class.toString();
+				handleValidationSegment = new MinHandleValidationSegment(handleConstraint.getConstraintValue());
 				break;
 
 			case NotEmptyHandleValidationSegment.KEY:
-				isValid = new NotEmptyHandleValidationSegment(handleConstraint.getConstraintValue()).handle(input);
-				invalidType = NotEmptyHandleValidationSegment.class.toString();
+				handleValidationSegment = new NotEmptyHandleValidationSegment(handleConstraint.getConstraintValue());
 				break;
 
 			case RangeHandleValidationSegment.KEY:
-				isValid = new RangeHandleValidationSegment(handleConstraint.getConstraintValue()).handle(input);
-				invalidType = RangeHandleValidationSegment.class.toString();
+				handleValidationSegment = new RangeHandleValidationSegment(handleConstraint.getConstraintValue());
 				break;
 
 			case PatternHandleValidationSegment.KEY:
-				isValid = new PatternHandleValidationSegment(handleConstraint.getConstraintValue())
-						.handle((String) input);
-				invalidType = PatternHandleValidationSegment.class.toString();
+				handleValidationSegment = new PatternHandleValidationSegment(handleConstraint.getConstraintValue());
 				break;
 
 			default:
 				break;
 			}
 
-			if (!isValid) {
-				System.out.println("Fail at " + invalidType);
-				return false;
+			if (!handleValidationSegment.handle(input)) {
+				throw new InvalidInputException("Fail validate at " + handleValidationSegment.getClass()
+						+ ", (constraint, input) = (" + handleValidationSegment.getInfor(input)[0] + ", "
+						+ handleValidationSegment.getInfor(input)[1] + ")");
 			}
 		}
 
