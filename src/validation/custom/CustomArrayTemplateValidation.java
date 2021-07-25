@@ -136,7 +136,7 @@ public class CustomArrayTemplateValidation<K> extends CustomValidation<K> {
 
 		for (int index = from; index < limitRange; index++) {
 			@SuppressWarnings("unchecked")
-			boolean isValid = new CustomTemplateValidation<K>((K) inputArr[index], constraint)
+			boolean isValid = new CustomTemplateValidation((K) inputArr[index], constraint)
 					.checkValidateConstraints();
 			if (!isValid) {
 				valid = index;

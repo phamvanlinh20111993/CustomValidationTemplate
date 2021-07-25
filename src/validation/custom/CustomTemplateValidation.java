@@ -1,7 +1,5 @@
 package validation.custom;
 
-import java.util.Collection;
-
 import validation.constraint.HandleConstraint;
 import validation.constraint.HandleValidationSegment;
 import validation.exception.InvalidInputException;
@@ -11,6 +9,7 @@ import validation.type.NotEmptyHandleValidationSegment;
 import validation.type.NotNullHandleValidationSegment;
 import validation.type.PatternHandleValidationSegment;
 import validation.type.RangeHandleValidationSegment;
+import validation.type.SizeHandleValidationSegment;
 
 /**
  * <ul>
@@ -20,30 +19,21 @@ import validation.type.RangeHandleValidationSegment;
  *
  * @author dev
  */
-public class CustomTemplateValidation<T> extends CustomValidation<T> {
+public class CustomTemplateValidation extends CustomValidation<Object> {
 
-	private T input;
-
-	private Collection<T> inputs;
+	private Object input;
 
 	/**
 	 * @param input
 	 */
-	public CustomTemplateValidation(T input, String constraints) {
+	public CustomTemplateValidation(Object input, String constraints) {
 		super(constraints);
 		this.input = input;
 	}
 
-	/**
-	 * @param input
-	 */
-	public CustomTemplateValidation(Collection<T> inputs, String constraints) {
-		super(constraints);
-		this.inputs = inputs;
-	}
-
 	public final boolean checkValidateConstraints() throws Exception {
 		assert (this.input != null);
+		
 		String[] constraints = splitConstraints();
 
 		for (String constraint : constraints) {
@@ -51,13 +41,13 @@ public class CustomTemplateValidation<T> extends CustomValidation<T> {
 			HandleConstraint handleConstraint = new HandleConstraint(constraint);
 			HandleValidationSegment<Object> handleValidationSegment = null;
 			switch (handleConstraint.getConstraintName()) {
+			
+			case NotNullHandleValidationSegment.KEY:
+				handleValidationSegment = new NotNullHandleValidationSegment(handleConstraint.getConstraintValue());
+				break;
 
 			case MaxHandleValidationSegment.KEY:
 				handleValidationSegment = new MaxHandleValidationSegment(handleConstraint.getConstraintValue());
-				break;
-
-			case NotNullHandleValidationSegment.KEY:
-				handleValidationSegment = new NotNullHandleValidationSegment(handleConstraint.getConstraintValue());
 				break;
 
 			case MinHandleValidationSegment.KEY:
@@ -74,6 +64,10 @@ public class CustomTemplateValidation<T> extends CustomValidation<T> {
 
 			case PatternHandleValidationSegment.KEY:
 				handleValidationSegment = new PatternHandleValidationSegment(handleConstraint.getConstraintValue());
+				break;
+				
+			case SizeHandleValidationSegment.KEY:
+				handleValidationSegment = new SizeHandleValidationSegment(handleConstraint.getConstraintValue());
 				break;
 
 			default:

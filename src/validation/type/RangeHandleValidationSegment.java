@@ -7,6 +7,7 @@ import java.util.regex.Pattern;
 
 import validation.constraint.HandleValidationSegment;
 import validation.exception.InvalidInputException;
+import validation.utils.CommonUtils;
 
 /**
  * <ul>
@@ -56,6 +57,10 @@ public class RangeHandleValidationSegment extends HandleValidationSegment<Object
 		if (input instanceof Map<?, ?>) {
 			inputLength = ((Map<?, ?>) input).size();
 		}
+		
+		if( CommonUtils.isNotNull(input.getClass().getComponentType())) {
+			inputLength = ((Object[]) input).length;
+		}
 
 		return inputLength >= left && inputLength < right;
 	}
@@ -96,13 +101,5 @@ public class RangeHandleValidationSegment extends HandleValidationSegment<Object
 
 	private String rangePattern() {
 		return "^(\\d+),\\s*(\\d+)$";
-	}
-
-	/**
-	 * @see validation.custom.ValidateSegment#getInfor(java.lang.Object)
-	 */
-	@Override
-	public String[] getInfor(Object input) {
-		return null;
 	}
 }

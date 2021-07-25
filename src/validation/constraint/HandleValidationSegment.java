@@ -2,6 +2,7 @@ package validation.constraint;
 
 import validation.custom.ValidateSegment;
 import validation.exception.InvalidConstraintException;
+import validation.utils.CommonUtils;
 
 /**
  * <ul>
@@ -48,5 +49,9 @@ public abstract class HandleValidationSegment<T> implements ValidateSegment<T> {
 					+ "require " + getValidateType() + " {" + constraintData + "}");
 		}
 		return this.isValid(input);
+	}
+
+	public String[] getInfor(T input) {
+		return new String[] { "{" + constraintData + "}", CommonUtils.isNotNull(input) ? input.toString() : "" };
 	}
 }

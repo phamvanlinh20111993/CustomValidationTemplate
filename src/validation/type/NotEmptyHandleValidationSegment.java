@@ -4,6 +4,7 @@ import java.util.Collection;
 import java.util.Map;
 
 import validation.constraint.HandleValidationSegment;
+import validation.utils.CommonUtils;
 
 /**
  * <ul>
@@ -42,6 +43,10 @@ public class NotEmptyHandleValidationSegment extends HandleValidationSegment<Obj
 		if (input instanceof Map<?, ?>) {
 			return !((Map<?, ?>) input).isEmpty();
 		}
+		
+		if( CommonUtils.isNotNull(input.getClass().getComponentType())) {
+			return ((Object[]) input).length > 0;
+		}
 
 		return false;
 	}
@@ -61,13 +66,4 @@ public class NotEmptyHandleValidationSegment extends HandleValidationSegment<Obj
 	public String getValidateType() {
 		return KEY;
 	}
-
-	/**
-	 * @see validation.custom.ValidateSegment#getInfor(java.lang.Object)
-	 */
-	@Override
-	public String[] getInfor(Object input) {
-		return null;
-	}
-
 }

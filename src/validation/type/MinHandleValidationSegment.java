@@ -4,6 +4,7 @@ import java.util.Collection;
 import java.util.Map;
 
 import validation.constraint.HandleValidationSegment;
+import validation.utils.CommonUtils;
 
 public class MinHandleValidationSegment extends HandleValidationSegment<Object> {
 	
@@ -38,12 +39,11 @@ public class MinHandleValidationSegment extends HandleValidationSegment<Object> 
             return constraintValue <= ((Map<?, ?>) input).size();
         }
         
+        if( CommonUtils.isNotNull(input.getClass().getComponentType())) {
+			return constraintValue  <=((Object[]) input).length;
+		}
+        
         return false;
-	}
-
-	@Override
-	public String[] getInfor(Object input) {
-		return null;
 	}
 
 	@Override

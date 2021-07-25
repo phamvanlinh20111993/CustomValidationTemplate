@@ -1,6 +1,7 @@
 package validation.type;
 
 import validation.constraint.HandleValidationSegment;
+import validation.utils.CommonUtils;
 
 /**
  * <ul>
@@ -26,7 +27,7 @@ public class NotNullHandleValidationSegment extends HandleValidationSegment<Obje
      */
     @Override
     public boolean isValid(Object input) throws Exception {
-        return input != null;
+        return CommonUtils.isNotNull(input);
     }
 
     /**
@@ -43,13 +44,5 @@ public class NotNullHandleValidationSegment extends HandleValidationSegment<Obje
     @Override
     public String getValidateType() {
         return KEY;
-    }
-
-    /**
-     * @see validation.custom.ValidateSegment#getInfor(java.lang.Object)
-     */
-    @Override
-    public String[] getInfor(Object input) {
-        return null;
     }
 }

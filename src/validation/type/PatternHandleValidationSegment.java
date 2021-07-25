@@ -58,13 +58,4 @@ public class PatternHandleValidationSegment extends HandleValidationSegment<Obje
 	public String getValidateType() {
 		return KEY;
 	}
-
-	/**
-	 * @see validation.custom.ValidateSegment#getInfor(java.lang.Object)
-	 */
-	@Override
-	public String[] getInfor(Object input) {
-		return null;
-	}
-
 }
